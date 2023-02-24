@@ -11,7 +11,7 @@ const openai = new OpenAIApi(configuration);
 
 
 const createEdit=async()=>{
-
+console.log('creating edit')
   const filePath = path.join(process.cwd(), 'components','Core','output.png');
     const response = await openai.createImageEdit(
         fs.createReadStream(filePath),
@@ -20,7 +20,7 @@ const createEdit=async()=>{
           1,
       "1024x1024"
   );
-    console.log(response.data.data[0].url)
+  console.log('editing complete')
     return response.data.data[0].url
   
   

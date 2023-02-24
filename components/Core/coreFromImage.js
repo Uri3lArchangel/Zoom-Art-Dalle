@@ -13,8 +13,9 @@ export async function coreFromImage(numberOfImages,signal){
         if(!signal.aborted){
         
        await resize(`${filePath}/${i}.jpg`).then(async()=>{
-        const url =await createEdit()
+       await createEdit().then(async(url)=>{
         await storeImage(url,i)
+       })
        })
         
     }else{

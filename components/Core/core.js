@@ -5,23 +5,24 @@ const fs=require('fs')
 const createEdit = require('./createEdit')
 const path =require('path')
 
-const filePath1 = path.join(process.cwd(), 'components', 'Core', 'output.png');
 
 const filePath = path.join(process.cwd(), 'public', 'images');
 export async function core(description,numberOfImages,signal){
     try {
     let currentDescription = description
     for(let i=0;i<numberOfImages;i++){
-      console.log('itereation',i)
+      console.log('iteration',i)
         if(!signal.aborted){
     if(i === 0){
     const url = await generateImage(currentDescription)
      await store(url,i)
     }
     else{
-       await resize(`${filePath}/${i}.jpg`).then(async()=>{
-        const url =await createEdit()
-        await store(url,i)
+      await resize(`${filePath}/${i}.jpg`).then(async()=>{
+       await createEdit().then(async(url)=>{
+          await store(url,i)
+
+        })
        })
         
     }

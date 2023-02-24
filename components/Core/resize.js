@@ -7,6 +7,7 @@ const filePath = path.join(process.cwd(), 'components', 'Core', 'output.png');
 
 
  async function resize(image){
+  console.log('resizing')
         const metadata = await sharp(image).metadata();
         const { width, height } = metadata;
       
@@ -34,7 +35,7 @@ const filePath = path.join(process.cwd(), 'components', 'Core', 'output.png');
           .png()
           .toFile(filePath);
       
-        console.log(output);
+        console.log('resizing ended');
       
     }
 

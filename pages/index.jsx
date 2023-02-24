@@ -1,5 +1,5 @@
 import {useRouter } from 'next/router'
-import React, { Fragment, useEffect, useRef } from 'react'
+import React, { Fragment, useRef } from 'react'
 
 function Index() {
     const router = useRouter()
@@ -26,34 +26,33 @@ function Index() {
 
     async function generateFromPrompt(){
     
-    document.getElementById('abort').style.display = 'block'
     
     let prompt =promptRef.current.value
     let number = Number(numberRef.current.value).toFixed(0)
     if(prompt == ''){
-        document.getElementById('promptText').value = 'Prompt Cannot Be Empty'
+        document.getElementById('promptText').innerHTML = 'Prompt Cannot Be Empty'
         document.getElementById('promptText').style.color='red'
         let timeout = setTimeout(()=>{
-            document.getElementById('promptText').value = "Enter Your Promp Here"
+            document.getElementById('promptText').innerHTML = "Enter Your Promp Here"
             document.getElementById('promptText').style.color='black'
 
         },3000)
         return
     }else if(number == ''){
-        document.getElementById('numberText').value = 'Number Cannot Be Empty'
+        document.getElementById('numberText').innerHTML = 'Number Cannot Be Empty'
         document.getElementById('numberText').style.color='red'
         let timeout = setTimeout(()=>{
-            document.getElementById('numberText').value = "Enter the number of images you want to generate Note: The higher this number the longer it will take"
+            document.getElementById('numberText').innerHTML = "Enter the number of images you want to generate Note: The higher this number the longer it will take"
             document.getElementById('numberText').style.color='black'
 
         },3000)
         return
     }
     else if(number <2){
-        document.getElementById('numberText').value = 'Number must be atleast 2'
+        document.getElementById('numberText').innerHTML = 'Number must be atleast 2'
         document.getElementById('numberText').style.color='red'
         let timeout = setTimeout(()=>{
-            document.getElementById('numberText').value = "Enter the number of images you want to generate Note: The higher this number the longer it will take"
+            document.getElementById('numberText').innerHTML = "Enter the number of images you want to generate Note: The higher this number the longer it will take"
             document.getElementById('numberText').style.color='black'
 
         },3000)
@@ -63,6 +62,7 @@ function Index() {
         "prompt":prompt,
         "number":number
     }
+    document.getElementById('abort').style.display = 'block'
     document.getElementById('progress').style.display='block'
     fetch('http://localhost:3000/api/core',
         {method:'POST',body:JSON.stringify(data),mode:'no-cors'},{signal}).then((res)=>{
@@ -95,25 +95,24 @@ function Index() {
 
     async function generateFromImage(){
 
-    let number = numberRef.current.value
-    let image = imageRef.current.files[0]
+        let number = Number(numberRef.current.value).toFixed(0)
+        let image = imageRef.current.files[0]
 
-    document.getElementById('abort').style.display = 'block'
      if(number == ''){
-        document.getElementById('numberText').value = 'Number Cannot Be Empty'
+        document.getElementById('numberText').innerHTML = 'Number Cannot Be Empty'
         document.getElementById('numberText').style.color='red'
         let timeout = setTimeout(()=>{
-            document.getElementById('numberText').value = "Enter the number of images you want to generate Note: The higher this number the longer it will take"
+            document.getElementById('numberText').innerHTML = "Enter the number of images you want to generate Note: The higher this number the longer it will take"
             document.getElementById('numberText').style.color='black'
 
         },3000)
         return
     }
     else if(number <2){
-        document.getElementById('numberText').value = 'Number must be atleast 2'
+        document.getElementById('numberText').innerHTML = 'Number must be atleast 2'
         document.getElementById('numberText').style.color='red'
         let timeout = setTimeout(()=>{
-            document.getElementById('numberText').value = "Enter the number of images you want to generate Note: The higher this number the longer it will take"
+            document.getElementById('numberText').innerHTML = "Enter the number of images you want to generate Note: The higher this number the longer it will take"
             document.getElementById('numberText').style.color='black'
 
         },3000)
@@ -139,7 +138,7 @@ function Index() {
             "image":image,
             "number":number
         }
-            
+        document.getElementById('abort').style.display = 'block'
             document.getElementById('progress').style.display='block'
               await fetch("http://localhost:3000/api/coreFromImage", {
                 method: "POST",

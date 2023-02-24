@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 function MyPage({number}) {
 const router = useRouter()
-
+let interval
 
 function zoom(num){
   let Zoom
@@ -13,7 +13,7 @@ function zoom(num){
   localStorage.setItem('id',id)
   let image = document.getElementById('image')
   image.src = `/images/${num}.jpg`
- let interval= setInterval(()=>{
+  interval= setInterval(()=>{
     image.style.transition='all 0.5s linear'
 
     let _zoom = localStorage.getItem('zoom')
@@ -54,9 +54,11 @@ function zoom(num){
 
 useEffect(()=>{
   console.log('number',number)
-
   zoom(number)
 
+return ()=>{
+  clearInterval(interval)
+}
 },[])
   return(
 
