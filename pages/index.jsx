@@ -1,9 +1,7 @@
-import axios from 'axios'
-import  { useRouter } from 'next/router'
+import {useRouter } from 'next/router'
 import React, { Fragment, useEffect, useRef } from 'react'
-// import {core} from '../components/Core/core'
 
-function index() {
+function Index() {
     const router = useRouter()
     let promptRef =useRef() 
     let numberRef=useRef()
@@ -177,10 +175,7 @@ function index() {
           };
     
 
-useEffect(()=>{
 
-
-})
 
  
   return (
@@ -271,5 +266,5 @@ useEffect(()=>{
   )
 }
 
-export default index
+export default Index
 

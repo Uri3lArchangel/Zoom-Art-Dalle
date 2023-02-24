@@ -57,7 +57,7 @@ useEffect(()=>{
 
   zoom(number)
 
-})
+},[])
   return(
 
   <div id="tld">
